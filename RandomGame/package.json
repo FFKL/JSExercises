@@ -1,0 +1,10 @@
+{
+  "name": "RandomGame",
+  "version": "0.0.1",
+  "dependencies": {
+    "better-console": "0.2.4",
+    "minimist": "1.2.0",
+    "colors": "1.1.2",
+    "bm-random": "1.0.0"
+  }
+}
