@@ -3,12 +3,23 @@ var fs = require("fs"),
     colors = require("colors"),
     prompt = require("prompt");
 
-var schema = {
+
+var regExp = /^(1|2)$/;
+var schemaGame = {
     properties: {
         num: {
             description: "Введите 1(орел), либо 2(решка)",
-            pattern: /^(1|2)$/,
+            pattern: regExp,
             message: "Введите 1(орел), либо 2(решка)"
+        }
+    }
+};
+var schemaContinue = {
+    properties: {
+        question: {
+            description: "Хотите продолжить игру? 1 - Да, 2 - Нет",
+            pattern: regExp,
+            message: "Введите корректную команду!"
         }
     }
 };
@@ -18,19 +29,32 @@ prompt.message = "";
 startGame();
 
 function startGame() {
-    prompt.get(schema, function (err, result) {
+    prompt.get(schemaGame, function (err, result) {
         var rand = random.fromRange(1, 2);
-        console.log(colors.red(rand));
-        if (rand === +result.num) {
-            console.log("Вы выиграли!")
+        console.log(colors.yellow(rand));
+        if (err) {
+            throw err;
+        } else if (rand === +result.num) {
+            console.log(colors.green("Вы выиграли!"))
         } else {
-            console.log("Вы проиграли! ЛУЗЕЕЕР!")
+            console.log(colors.red("Вы проиграли! ЛУЗЕЕЕР!"))
         }
-        fs.appendFile("RandomGame/game_log.txt", result.num + "," + rand + "\n", function(err) {
+        fs.appendFile("game_log.txt", result.num + "," + rand + "\n", function(err) {
             if (err) throw err;
             console.log("Результат сохранен");
-            startGame();
+            continueGame();
         });
     });
 }
 
+function continueGame() {
+    prompt.get(schemaContinue, function (err, result) {
+        if (err) {
+            throw err
+        } else if (+result.question === 1) {
+            startGame();
+        } else {
+            process.exit();
+        }
+    });
+}
