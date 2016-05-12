@@ -2,7 +2,8 @@
   "name": "RandomGame",
   "version": "0.0.1",
   "dependencies": {
-    "better-console": "0.2.4",
+    "sugar": "1.4.1",
+    "console-table": "0.1.2",
     "minimist": "1.2.0",
     "colors": "1.1.2",
     "bm-random": "1.0.0",

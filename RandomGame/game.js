@@ -39,7 +39,7 @@ function startGame() {
         } else {
             console.log(colors.red("Вы проиграли! ЛУЗЕЕЕР!"))
         }
-        fs.appendFile("game_log.txt", result.num + "," + rand + "\n", function(err) {
+        fs.appendFile("game_log.txt", result.num + "," + rand + "\n", function (err) {
             if (err) throw err;
             console.log("Результат сохранен");
             continueGame();
