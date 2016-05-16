@@ -1,8 +1,10 @@
 var fs = require("fs"),
-    sugar = require("sugar");
+    sugar = require("sugar"),
+    argv = require("minimist")(process.argv.slice(2)),
+    file = argv["_"][0];
 const WIN = "0", LOST = "1";
 
-fs.readFile("game_log.txt", function(err, result) {
+fs.readFile(file || "game_log.txt", function(err, result) {
     if (err) {
         throw err;
     } else {

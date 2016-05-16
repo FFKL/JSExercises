@@ -1,7 +1,9 @@
 var fs = require("fs"),
     random = require("bm-random"),
     colors = require("colors"),
-    prompt = require("prompt");
+    prompt = require("prompt"),
+    argv = require("minimist")(process.argv.slice(2)),
+    file = argv["_"][0];
 
 
 var regExp = /^(1|2)$/;
@@ -39,7 +41,7 @@ function startGame() {
         } else {
             console.log(colors.red("Вы проиграли! ЛУЗЕЕЕР!"))
         }
-        fs.appendFile("game_log.txt", result.num + "," + rand + "\n", function (err) {
+        fs.appendFile(file || "game_log.txt", result.num + "," + rand + "\n", function (err) {
             if (err) throw err;
             console.log("Результат сохранен");
             continueGame();
