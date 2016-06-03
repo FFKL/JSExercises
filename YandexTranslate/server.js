@@ -15,10 +15,22 @@ fs.readFile("key.txt", function(err, result) {
 });
 
 function onRequest(request, response) {
-    response.writeHead(200, {"Content-Type": "text/plain"});
     var params = urlutils.parse(request.url, true);
-    if (params.pathname !== "/favicon.ico") {
+    if (params.pathname === "/") {
+        response.writeHead(200, {"Content-Type": "text/html"});
+        fs.readFile("front/translator.html", function(err, result) {
+            if (err) {
+                throw err;
+            } else {
+                response.write(result);
+                response.end();
+
+            }
+        });
+
+    } else if (params.pathname === "/translate") {
         translateIt(key, params.query.lang, params.query.text, function(translateResult) {
+            response.writeHead(200, {"Content-Type": "text/plain"});
             response.write(translateResult);
             response.end();
         });
