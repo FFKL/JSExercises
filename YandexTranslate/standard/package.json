@@ -2,6 +2,6 @@
   "name": "YandexTranslate",
   "version": "0.0.1",
   "dependencies": {
-    "request": "2.72.0"
+    "request": "2.x"
   }
 }

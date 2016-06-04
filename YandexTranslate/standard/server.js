@@ -4,7 +4,7 @@ var fs = require("fs"),
     urlutils = require("url"),
     key = "";
 
-fs.readFile("key.txt", function(err, result) {
+fs.readFile(__dirname + "/key.txt", function(err, result) {
     if (err) {
         throw err;
     } else {
@@ -18,7 +18,7 @@ function onRequest(request, response) {
     var params = urlutils.parse(request.url, true);
     if (params.pathname === "/") {
         response.writeHead(200, {"Content-Type": "text/html"});
-        fs.readFile("front/translator.html", function(err, result) {
+        fs.readFile(__dirname + "/front/translator.html", function(err, result) {
             if (err) {
                 throw err;
             } else {
