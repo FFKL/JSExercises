@@ -1,11 +1,32 @@
-<h1>{{title}}</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<h1 id="content">{{title}}</h1>
 {{#if error}}
     <h2>{{error}}</h2>
 {{/if}}
 
-<form method="POST">
+<form id="translate">
     <input type="radio" name="lang" value="en-ru" checked>EN-RU
     <input type="radio" name="lang" value="ru-en">RU-EN
     <input type="text" name="text">
     <input type="submit" value="Перевести">
 </form>
+
+<script type="text/javascript">
+    $("#translate").submit(function() {
+        var str = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "/ajax",
+            data: str,
+            success: function(json) {
+                if (json.error === undefined) {
+                    $("#content").html(json.title);
+                } else {
+                    $("#content").html(json.title + " " + json.error);
+                }
+            }
+        });
+        return false;
+    })
+</script>

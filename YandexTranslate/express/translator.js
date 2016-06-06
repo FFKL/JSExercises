@@ -32,9 +32,9 @@ app.get('/', function(req, res) {
     })
 });
 
-app.post('/', function(req, res) {
+app.post('/ajax', function(req, res) {
     if (!req.body.text || req.body.text == "") {
-        res.render('translator', {
+        res.json({
             title: "Введите слово для перевода"
         })
     } else {
@@ -57,14 +57,13 @@ app.post('/', function(req, res) {
                 data = {
                     title: "Ошибка при переводе слова " + req.body.text,
                     error: json.message
-                }
+                };
             } else {
                 data = {
                     title: 'Перевод слова ' + req.body.text + ': ' + json.text
-                }
+                };
             }
-
-            res.render('translator', data)
-        })
+            res.json(data);
+        });
     }
 });
