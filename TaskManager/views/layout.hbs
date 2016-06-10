@@ -1,0 +1,14 @@
+<h1>TODO manager</h1>
+
+{{{content}}}
+
+<h2>Добавить задачу</h2>
+
+{{#if error}}
+    <h2>error</h2>
+{{/if}}
+
+<form method="post">
+    Задача: <input type="text" name="task">
+    <input type="submit" value="Add">
+</form>

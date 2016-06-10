@@ -1,0 +1,12 @@
+{
+  "name": "TaskManagerr",
+  "version": "0.0.1",
+  "dependencies": {
+    "mysql": "2.x",
+    "express": "4.x",
+    "body-parser": "1.x",
+    "consolidate": "0.x",
+    "handlebars": "2.x",
+    "request": "2.x"
+  }
+}
