@@ -9,7 +9,7 @@ var pool = mysql.createPool({
 
 var Tasks = {
     list: function(callback) {
-       pool.query('SELECT * FROM tasks', callback);
+        pool.query('SELECT * FROM tasks', callback);
     },
 
     add: function(task, callback) {
@@ -20,7 +20,7 @@ var Tasks = {
         //todo sql update
     },
 
-    complete: function (id, callback) {
+    complete: function (id, flag, callback) {
         //todo sql update
     },
 

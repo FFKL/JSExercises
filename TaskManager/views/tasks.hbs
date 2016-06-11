@@ -1,5 +1,10 @@
-<h2>Список задач</h2>
-
-{{#each tasks}}
-    {{id}} {{task}} {{flag}}<br>
-{{/each}}
+<h3>Список задач</h3>
+<table class="table">
+    {{#each tasks}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{task}}</td>
+            <td>{{flag}}</td>
+        </tr>
+    {{/each}}
+</table>
