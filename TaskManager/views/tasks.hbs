@@ -1,10 +1,37 @@
 <h3>Список задач</h3>
 <table class="table">
     {{#each tasks}}
-        <tr>
+        {{#ifCond flag}}
+            <tr class="active">
+        {{else}}
+            <tr class="success">
+        {{/ifCond}}
             <td>{{id}}</td>
             <td>{{task}}</td>
-            <td>{{flag}}</td>
+            <td>
+                <form method="POST" action="/delete">
+                    <input type="hidden" value={{id}} name="id">
+                    <input type="submit" value="Удалить" class="btn btn-primary">
+                </form>
+            </td>
+            <td>
+                <form method="POST" action="/complete">
+                    <input type="hidden" value={{id}} name="id">
+                    <button type="submit" class="btn btn-success">Выполнено</button>
+                </form>
+            </td>
+            <td>
+                <button class="btn btn-primary spoiler-title">Изменить задачу</button>
+                <div class="spoiler-body">
+                    <form method="post" action="/change" class="form-inline">
+                        <div class="form-group">
+                            <input type="hidden" value={{id}} name="id">
+                            <input type="text" name="task">
+                        </div>
+                        <input type="submit" value="Изменить" class="btn btn-primary">
+                    </form>
+                </div>
+            </td>
         </tr>
     {{/each}}
 </table>

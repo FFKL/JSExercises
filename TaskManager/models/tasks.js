@@ -16,16 +16,16 @@ var Tasks = {
         pool.query('INSERT INTO tasks SET ?', {task: task, flag: false}, callback)
     },
 
-    change: function (id, text, callback) {
-        //todo sql update
+    change: function (id, task, callback) {
+        pool.query('UPDATE tasks SET ? WHERE ?', [{task: task}, {id: id}], callback)
     },
 
-    complete: function (id, flag, callback) {
-        //todo sql update
+    complete: function (id, callback) {
+        pool.query('UPDATE tasks SET ? WHERE ?', [{flag: true}, {id: id}], callback)
     },
 
     delete: function (id, callback) {
-        //todo sql delete
+        pool.query('DELETE FROM tasks WHERE ?', {id: id}, callback)
     }
 };
 

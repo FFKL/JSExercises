@@ -3,6 +3,8 @@ var tasks = require('./models/tasks');
 var express = require('express');
 var app = express();
 
+var handlebars = require('handlebars');
+
 var bodyParser = require('body-parser');
 app.use(bodyParser());
 
@@ -14,18 +16,21 @@ app.set('views', __dirname + '/views');
 var request = require('request');
 var urlutils = require('url');
 
+handlebars.registerHelper('ifCond', function(flag, options) {
+    if(flag === 0) {
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
+
 app.get('/', function(req, res) {
     tasks.list(function(err, tasks) {
-        console.dir(tasks);
-
         res.render(
             'tasks',
             {tasks: tasks},
             function(err, html) {
                 if (err)
                     throw err;
-
-                console.log(html);
 
                 res.render('layout', {
                     content: html
@@ -35,11 +40,25 @@ app.get('/', function(req, res) {
     })
 });
 
-app.post('/', function (req, res) {
+app.post('/add', function (req, res) {
     tasks.add(req.body.task, function () {
         res.redirect('/');
     })
 });
-
-app.listen(8088);
+app.post('/change', function (req, res) {
+    tasks.change(req.body.id, req.body.task, function () {
+        res.redirect('/');
+    })
+});
+app.post('/complete', function (req, res) {
+    tasks.complete(req.body.id, function () {
+        res.redirect('/');
+    })
+});
+app.post('/delete', function (req, res) {
+    tasks.delete(req.body.id, function () {
+        res.redirect('/');
+    })
+});
+app.listen(8080);
 console.log("Server has started");
