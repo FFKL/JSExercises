@@ -1,11 +1,7 @@
-var mysql = require('mysql');
+var mysql = require('mysql'),
+    settings = require('../settings.js');
 
-var pool = mysql.createPool({
-    host: 'localhost',
-    database: 'todo',
-    user: 'mysql',
-    password: 'mysql'
-});
+var pool = mysql.createPool(settings);
 
 var Tasks = {
     list: function(callback) {

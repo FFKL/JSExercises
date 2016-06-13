@@ -14,9 +14,8 @@ app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 
 var request = require('request');
-var urlutils = require('url');
 
-handlebars.registerHelper('ifCond', function(flag, options) {
+handlebars.registerHelper('ifFlag', function(flag, options) {
     if(flag === 0) {
         return options.fn(this);
     }

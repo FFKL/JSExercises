@@ -1,11 +1,11 @@
 <h3>Список задач</h3>
 <table class="table">
     {{#each tasks}}
-        {{#ifCond flag}}
+        {{#ifFlag flag}}
             <tr class="active">
         {{else}}
             <tr class="success">
-        {{/ifCond}}
+        {{/ifFlag}}
             <td>{{id}}</td>
             <td>{{task}}</td>
             <td>
