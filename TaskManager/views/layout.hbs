@@ -29,10 +29,10 @@
 <body>
 <nav class="navbar navbar-inverse">
     <div class="navbar-header">
-        <a class="navbar-brand" href="/index">TODO manager</a>
+        <a class="navbar-brand" href="/">TODO manager</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    {{#if username}}
+    {{#if user.username}}
         <a href="/logout" class="btn btn-default navbar-btn">Выйти</a>
     {{else}}
         <form class="navbar-form navbar-left" method="post" action="/login">
@@ -44,31 +44,13 @@
         </form>
     {{/if}}
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">{{username}}</a></li>
+            <li><a href="#">{{user.username}}</a></li>
         </ul>
     </div>
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
-            {{{content}}}
-        </div>
-
-        <div class="col-md-2">
-            <h4>Добавить задачу</h4>
-
-            {{#if error}}
-                <h2>error</h2>
-            {{/if}}
-
-            <form method="post" action="/add">
-                <div class="form-group">
-                    Задача: <input type="text" name="task">
-                </div>
-                <input type="submit" value="Добавить" class="btn btn-primary">
-            </form>
-        </div>
-
+       {{{content}}}
     </div>
 </div>
 

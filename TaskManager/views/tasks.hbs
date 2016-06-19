@@ -1,21 +1,22 @@
 <h3>Список задач</h3>
-<table class="table">
-    {{#each tasks}}
-        {{#ifFlag flag}}
+
+<div class="col-md-10">
+    <table class="table">
+        {{#each tasks}}
+            {{#ifFlag flag}}
             <tr class="active">
-        {{else}}
+            {{else}}
             <tr class="success">
-        {{/ifFlag}}
-            <td>{{id}}</td>
+            {{/ifFlag}}
             <td>{{task}}</td>
             <td>
-                <form method="POST" action="/delete">
+                <form method="POST" action="/user/delete">
                     <input type="hidden" value={{id}} name="id">
                     <input type="submit" value="Удалить" class="btn btn-primary">
                 </form>
             </td>
             <td>
-                <form method="POST" action="/complete">
+                <form method="POST" action="/user/complete">
                     <input type="hidden" value={{id}} name="id">
                     <button type="submit" class="btn btn-success">Выполнено</button>
                 </form>
@@ -23,7 +24,7 @@
             <td>
                 <button class="btn btn-primary spoiler-title">Изменить задачу</button>
                 <div class="spoiler-body">
-                    <form method="post" action="/change" class="form-inline">
+                    <form method="post" action="/user/change" class="form-inline">
                         <div class="form-group">
                             <input type="hidden" value={{id}} name="id">
                             <input type="text" name="task">
@@ -33,5 +34,21 @@
                 </div>
             </td>
         </tr>
-    {{/each}}
-</table>
+        {{/each}}
+    </table>
+</div>
+
+<div class="col-md-2">
+    <h4>Добавить задачу</h4>
+
+    {{#if error}}
+        <h2>error</h2>
+    {{/if}}
+
+    <form method="post" action="/user/add">
+        <div class="form-group">
+            Задача: <input type="text" name="task">
+        </div>
+        <input type="submit" value="Добавить" class="btn btn-primary">
+    </form>
+</div>
